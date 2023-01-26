@@ -1,0 +1,488 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios16.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Fazpass_build
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Contacts
+import CoreLocation
+@_exported import Fazpass_build
+import Foundation
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+public struct ApiResponse<C> : Swift.Codable where C : Swift.Decodable, C : Swift.Encodable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct CheckResponse : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct Apps : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct Current : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct Other : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct UserResponse : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct OtpResponse : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class Fazpass {
+  public static func initialize(_ MERCHANT_KEY: Swift.String, _ TD_MODE: Fazpass_build.TD_MODE)
+  public static func removeDevice(pin: Swift.String, results: @escaping (Swift.Result<Fazpass_build.CheckResponse?, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func check(_ email: Swift.String?, _ phone: Swift.String?, _ completion: @escaping (Swift.Result<Fazpass_build.FazpassTd, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func requestOtpByPhone(_ phoneNumber: Swift.String, _ gateWay: Swift.String, _ results: @escaping (Fazpass_build.Results<Fazpass_build.OtpResponse?, Swift.String?, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func requestOtpByEmail(_ email: Swift.String, _ gateWay: Swift.String, _ results: @escaping (Fazpass_build.Results<Fazpass_build.OtpResponse?, Swift.String?, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func generateOtpByPhone(_ phoneNumber: Swift.String, _ gateWay: Swift.String, _ results: @escaping (Fazpass_build.Results<Fazpass_build.OtpResponse?, Swift.String?, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func generateOtpByEmail(_ email: Swift.String, _ gateWay: Swift.String, _ results: @escaping (Fazpass_build.Results<Fazpass_build.OtpResponse?, Swift.String?, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func sendOtpByPhone(_ otp: Swift.String, _ phoneNumber: Swift.String, _ gateWay: Swift.String, _ results: @escaping (Swift.Result<Fazpass_build.OtpResponse?, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func sendOtpByEmail(_ otp: Swift.String, _ email: Swift.String, _ gateWay: Swift.String, _ results: @escaping (Swift.Result<Fazpass_build.OtpResponse?, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func verificationOtp(_ otp: Swift.String, _ otpId: Swift.String, _ results: @escaping (Swift.Result<Swift.Bool, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func headerEnreachment(_ phoneNumber: Swift.String, _ gateWay: Swift.String, _ results: @escaping (Swift.Result<Fazpass_build.CheckResponse?, Fazpass_build.FazPassError>) -> Swift.Void)
+  public static func permissionCheck()
+  public static func getNumber() -> Swift.String?
+  public static func setNumber(number: Swift.String?)
+  @objc deinit
+}
+public struct CheckRequest : Swift.Codable {
+  public init(app: Swift.String? = nil, device: Swift.String? = nil, email: Swift.String? = nil, location: Fazpass_build.Location? = nil, phone: Swift.String? = nil, timezone: Swift.String? = nil, userId: Swift.String? = nil)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct Location : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class FazpassTd {
+  public var status: Fazpass_build.Status
+  public func enrollDeviceByPin(pin: Swift.String, results: @escaping (Swift.Result<Swift.Void, Fazpass_build.FazPassError>) -> Swift.Void)
+  @objc deinit
+}
+public enum FazPassError : Swift.Error {
+  case notFound
+  case badGateWay
+  case internalServerError
+  case decodeError
+  case generalError
+  case phoneOrEmailEmpty
+  case softError(error: Fazpass_build.ErrorResponse)
+  public var message: Swift.String {
+    get
+  }
+  public var softErrorResponse: Fazpass_build.ErrorResponse {
+    get
+  }
+}
+public struct ErrorResponse : Swift.Codable, Swift.Error {
+  public var code: Swift.String
+  public var status: Swift.Bool
+  public var message: Swift.String
+  public init(code: Swift.String, status: Swift.Bool, message: Swift.String)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum Status {
+  case trusted
+  case untrusted
+  public static func == (a: Fazpass_build.Status, b: Fazpass_build.Status) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum TD_MODE {
+  case DEV
+  case PROD
+  public static func == (a: Fazpass_build.TD_MODE, b: Fazpass_build.TD_MODE) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension Swift.Result where Success == () {
+  public static var success: Swift.Result<(), Failure> {
+    get
+  }
+}
+public enum Results<Success, Incoming, Failure> {
+  case success(Success)
+  case incomingMessage(Incoming)
+  case failure(Failure)
+}
+public struct User : Swift.Codable {
+  public init(pin: Swift.String? = nil, app: Swift.String? = nil, device: Swift.String? = nil, userId: Swift.String? = nil)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum SwiftyJSONError : Swift.Int, Swift.Error {
+  case unsupportedType
+  case indexOutOfBounds
+  case elementTooDeep
+  case wrongType
+  case notExist
+  case invalidJSON
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension Fazpass_build.SwiftyJSONError : Foundation.CustomNSError {
+  public static var errorDomain: Swift.String {
+    get
+  }
+  public var errorCode: Swift.Int {
+    get
+  }
+  public var errorUserInfo: [Swift.String : Any] {
+    get
+  }
+}
+public enum Type : Swift.Int {
+  case number
+  case string
+  case bool
+  case array
+  case dictionary
+  case null
+  case unknown
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct JSON {
+  public init(data: Foundation.Data, options opt: Foundation.JSONSerialization.ReadingOptions = []) throws
+  public init(_ object: Any)
+  public init(parseJSON jsonString: Swift.String)
+  public mutating func merge(with other: Fazpass_build.JSON) throws
+  public func merged(with other: Fazpass_build.JSON) throws -> Fazpass_build.JSON
+  public var type: Fazpass_build.`Type` {
+    get
+  }
+  public var error: Fazpass_build.SwiftyJSONError? {
+    get
+  }
+  public var object: Any {
+    get
+    set
+  }
+  @available(*, unavailable, renamed: "null")
+  public static var nullJSON: Fazpass_build.JSON {
+    get
+  }
+  public static var null: Fazpass_build.JSON {
+    get
+  }
+}
+public enum Index<T> : Swift.Comparable {
+  case array(Swift.Int)
+  case dictionary(Swift.DictionaryIndex<Swift.String, T>)
+  case null
+  public static func == (lhs: Fazpass_build.Index<T>, rhs: Fazpass_build.Index<T>) -> Swift.Bool
+  public static func < (lhs: Fazpass_build.Index<T>, rhs: Fazpass_build.Index<T>) -> Swift.Bool
+}
+public typealias JSONIndex = Fazpass_build.Index<Fazpass_build.JSON>
+public typealias JSONRawIndex = Fazpass_build.Index<Any>
+extension Fazpass_build.JSON : Swift.Collection {
+  public typealias Index = Fazpass_build.JSONRawIndex
+  public var startIndex: Fazpass_build.JSON.Index {
+    get
+  }
+  public var endIndex: Fazpass_build.JSON.Index {
+    get
+  }
+  public func index(after i: Fazpass_build.JSON.Index) -> Fazpass_build.JSON.Index
+  public subscript(position: Fazpass_build.JSON.Index) -> (Swift.String, Fazpass_build.JSON) {
+    get
+  }
+  public typealias Element = (Swift.String, Fazpass_build.JSON)
+  public typealias Indices = Swift.DefaultIndices<Fazpass_build.JSON>
+  public typealias Iterator = Swift.IndexingIterator<Fazpass_build.JSON>
+  public typealias SubSequence = Swift.Slice<Fazpass_build.JSON>
+}
+public enum JSONKey {
+  case index(Swift.Int)
+  case key(Swift.String)
+}
+public protocol JSONSubscriptType {
+  var jsonKey: Fazpass_build.JSONKey { get }
+}
+extension Swift.Int : Fazpass_build.JSONSubscriptType {
+  public var jsonKey: Fazpass_build.JSONKey {
+    get
+  }
+}
+extension Swift.String : Fazpass_build.JSONSubscriptType {
+  public var jsonKey: Fazpass_build.JSONKey {
+    get
+  }
+}
+extension Fazpass_build.JSON {
+  public subscript(path: [Fazpass_build.JSONSubscriptType]) -> Fazpass_build.JSON {
+    get
+    set
+  }
+  public subscript(path: Fazpass_build.JSONSubscriptType...) -> Fazpass_build.JSON {
+    get
+    set
+  }
+}
+extension Fazpass_build.JSON : Swift.ExpressibleByStringLiteral {
+  public init(stringLiteral value: Swift.StringLiteralType)
+  public init(extendedGraphemeClusterLiteral value: Swift.StringLiteralType)
+  public init(unicodeScalarLiteral value: Swift.StringLiteralType)
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.StringLiteralType
+  public typealias StringLiteralType = Swift.StringLiteralType
+  public typealias UnicodeScalarLiteralType = Swift.StringLiteralType
+}
+extension Fazpass_build.JSON : Swift.ExpressibleByIntegerLiteral {
+  public init(integerLiteral value: Swift.IntegerLiteralType)
+  public typealias IntegerLiteralType = Swift.IntegerLiteralType
+}
+extension Fazpass_build.JSON : Swift.ExpressibleByBooleanLiteral {
+  public init(booleanLiteral value: Swift.BooleanLiteralType)
+  public typealias BooleanLiteralType = Swift.BooleanLiteralType
+}
+extension Fazpass_build.JSON : Swift.ExpressibleByFloatLiteral {
+  public init(floatLiteral value: Swift.FloatLiteralType)
+  public typealias FloatLiteralType = Swift.FloatLiteralType
+}
+extension Fazpass_build.JSON : Swift.ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift.String, Any)...)
+  public typealias Key = Swift.String
+  public typealias Value = Any
+}
+extension Fazpass_build.JSON : Swift.ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: Any...)
+  public typealias ArrayLiteralElement = Any
+}
+extension Fazpass_build.JSON : Swift.RawRepresentable {
+  public init?(rawValue: Any)
+  public var rawValue: Any {
+    get
+  }
+  public func rawData(options opt: Foundation.JSONSerialization.WritingOptions = JSONSerialization.WritingOptions(rawValue: 0)) throws -> Foundation.Data
+  public func rawString(_ encoding: Swift.String.Encoding = .utf8, options opt: Foundation.JSONSerialization.WritingOptions = .prettyPrinted) -> Swift.String?
+  public func rawString(_ options: [Fazpass_build.writingOptionsKeys : Any]) -> Swift.String?
+  public typealias RawValue = Any
+}
+extension Fazpass_build.JSON : Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension Fazpass_build.JSON {
+  public var array: [Fazpass_build.JSON]? {
+    get
+  }
+  public var arrayValue: [Fazpass_build.JSON] {
+    get
+  }
+  public var arrayObject: [Any]? {
+    get
+    set
+  }
+}
+extension Fazpass_build.JSON {
+  public var dictionary: [Swift.String : Fazpass_build.JSON]? {
+    get
+  }
+  public var dictionaryValue: [Swift.String : Fazpass_build.JSON] {
+    get
+  }
+  public var dictionaryObject: [Swift.String : Any]? {
+    get
+    set
+  }
+}
+extension Fazpass_build.JSON {
+  public var bool: Swift.Bool? {
+    get
+    set
+  }
+  public var boolValue: Swift.Bool {
+    get
+    set
+  }
+}
+extension Fazpass_build.JSON {
+  public var string: Swift.String? {
+    get
+    set
+  }
+  public var stringValue: Swift.String {
+    get
+    set
+  }
+}
+extension Fazpass_build.JSON {
+  public var number: Foundation.NSNumber? {
+    get
+    set
+  }
+  public var numberValue: Foundation.NSNumber {
+    get
+    set
+  }
+}
+extension Fazpass_build.JSON {
+  public var null: Foundation.NSNull? {
+    get
+    set
+  }
+  public func exists() -> Swift.Bool
+}
+extension Fazpass_build.JSON {
+  public var url: Foundation.URL? {
+    get
+    set
+  }
+}
+extension Fazpass_build.JSON {
+  public var double: Swift.Double? {
+    get
+    set
+  }
+  public var doubleValue: Swift.Double {
+    get
+    set
+  }
+  public var float: Swift.Float? {
+    get
+    set
+  }
+  public var floatValue: Swift.Float {
+    get
+    set
+  }
+  public var int: Swift.Int? {
+    get
+    set
+  }
+  public var intValue: Swift.Int {
+    get
+    set
+  }
+  public var uInt: Swift.UInt? {
+    get
+    set
+  }
+  public var uIntValue: Swift.UInt {
+    get
+    set
+  }
+  public var int8: Swift.Int8? {
+    get
+    set
+  }
+  public var int8Value: Swift.Int8 {
+    get
+    set
+  }
+  public var uInt8: Swift.UInt8? {
+    get
+    set
+  }
+  public var uInt8Value: Swift.UInt8 {
+    get
+    set
+  }
+  public var int16: Swift.Int16? {
+    get
+    set
+  }
+  public var int16Value: Swift.Int16 {
+    get
+    set
+  }
+  public var uInt16: Swift.UInt16? {
+    get
+    set
+  }
+  public var uInt16Value: Swift.UInt16 {
+    get
+    set
+  }
+  public var int32: Swift.Int32? {
+    get
+    set
+  }
+  public var int32Value: Swift.Int32 {
+    get
+    set
+  }
+  public var uInt32: Swift.UInt32? {
+    get
+    set
+  }
+  public var uInt32Value: Swift.UInt32 {
+    get
+    set
+  }
+  public var int64: Swift.Int64? {
+    get
+    set
+  }
+  public var int64Value: Swift.Int64 {
+    get
+    set
+  }
+  public var uInt64: Swift.UInt64? {
+    get
+    set
+  }
+  public var uInt64Value: Swift.UInt64 {
+    get
+    set
+  }
+}
+extension Fazpass_build.JSON : Swift.Comparable {
+}
+public func == (lhs: Fazpass_build.JSON, rhs: Fazpass_build.JSON) -> Swift.Bool
+public func <= (lhs: Fazpass_build.JSON, rhs: Fazpass_build.JSON) -> Swift.Bool
+public func >= (lhs: Fazpass_build.JSON, rhs: Fazpass_build.JSON) -> Swift.Bool
+public func > (lhs: Fazpass_build.JSON, rhs: Fazpass_build.JSON) -> Swift.Bool
+public func < (lhs: Fazpass_build.JSON, rhs: Fazpass_build.JSON) -> Swift.Bool
+public enum writingOptionsKeys {
+  case jsonSerialization
+  case castNilToNSNull
+  case maxObjextDepth
+  case encoding
+  public static func == (a: Fazpass_build.writingOptionsKeys, b: Fazpass_build.writingOptionsKeys) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension Fazpass_build.JSON : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension Fazpass_build.Status : Swift.Equatable {}
+extension Fazpass_build.Status : Swift.Hashable {}
+extension Fazpass_build.TD_MODE : Swift.Equatable {}
+extension Fazpass_build.TD_MODE : Swift.Hashable {}
+extension Fazpass_build.SwiftyJSONError : Swift.Equatable {}
+extension Fazpass_build.SwiftyJSONError : Swift.Hashable {}
+extension Fazpass_build.SwiftyJSONError : Swift.RawRepresentable {}
+extension Fazpass_build.`Type` : Swift.Equatable {}
+extension Fazpass_build.`Type` : Swift.Hashable {}
+extension Fazpass_build.`Type` : Swift.RawRepresentable {}
+extension Fazpass_build.writingOptionsKeys : Swift.Equatable {}
+extension Fazpass_build.writingOptionsKeys : Swift.Hashable {}

@@ -1,0 +1,11 @@
+framework module Fazpass_build {
+  umbrella header "Fazpass_build.h"
+
+  export *
+  module * { export * }
+}
+
+module Fazpass_build.Swift {
+  header "Fazpass_build-Swift.h"
+  requires objc
+}
